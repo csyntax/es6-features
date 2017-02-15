@@ -1,6 +1,6 @@
 var config = {
     codeBlockSelector: ".lang-javascript,.javascript",
-    indexSelector: ".content-index",
+    indexSelector: "#content-index",
     headlineSelector: "h2"
 };
 
@@ -142,6 +142,8 @@ class Page {
       $(element).wrap(`<a name="${element.innerHTML}"></a>`)
       $(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
     })
+
+
   }
 
   addCodeHighlight() {
@@ -176,6 +178,5 @@ function executeCode(index) {
 var page = new Page(config);
 
 $( document ).ajaxComplete(function() {
-
     page.initialize();
 });

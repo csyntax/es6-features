@@ -17,7 +17,7 @@
             <h1>JavaScript next reference!</h1>
         </header>
 
-        <ul class="content-index"></ul>
+        <ul id="content-index"></ul>
 
         <section id="content"></section>
 
@@ -25,7 +25,9 @@
         var converter = new showdown.Converter();
 
         var docs = [
-            "arrows.md"
+            "arrows.md",
+            "classes.md",
+            "Destructuring.md"
         ];
 
         for(var doc in docs) {
@@ -36,11 +38,11 @@
             });*/
 
             $.get("md/" + docs[doc], function (data) {
-                $("#content").append(converter.makeHtml(data));
+                $("body").append(converter.makeHtml(data));
             });
         }
 
-        
+
         </script>
 
         <script src="./scripts/main.js"></script>
