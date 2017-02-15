@@ -5,13 +5,12 @@
 
         <title>JavaScript next reference!</title>
 
+        <link rel="stylesheet" href="./styles/atom-one-dark.css">
         <link rel="stylesheet" href="./styles/main.css">
 
         <script src="./scripts/jquery.min.js"></script>
         <script src="./scripts/showdown.min.js"></script>
-
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="./scripts/highlight.pack.js"></script>
     </head>
     <body>
         <header role="banner">
@@ -30,11 +29,15 @@
         ];
 
         for(var doc in docs) {
-            $.ajax({
+            /*$.ajax({
                 url: "md/" + docs[doc]
             }).done(function (data) {
                 $("#content").append(converter.makeHtml(data));
-            })
+            });*/
+
+            $.get("md/" + docs[doc], function (data) {
+                $("#content").append(converter.makeHtml(data));
+            });
         }
         </script>
 
