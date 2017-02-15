@@ -173,14 +173,9 @@ function executeCode(index) {
 
 }
 
-// =========================================================================
-// Bootstraping
-// =========================================================================
-
-
-
 var page = new Page(config);
 
-$(document).ready(function () {
+$( document ).ajaxComplete(function() {
+
     page.initialize();
 });
