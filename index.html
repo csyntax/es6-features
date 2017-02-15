@@ -3,38 +3,42 @@
     <head>
         <meta charset="utf-8">
 
-        <title>EcmaScript 6 Reference</title>
+        <title>JavaScript next reference!</title>
 
         <link rel="stylesheet" href="./styles/main.css">
 
         <script src="./scripts/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/showdownjs/showdown/1.6.4/dist/showdown.min.js"></script>
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 
+
+
+        <script>
+            var converter = new showdown.Converter();
+
+            var docs = [
+
+            ];
+
+            $.ajax({
+                url: "./docs/arrows.md"
+            }).done(function (data) {
+                $("#content").append(converter.makeHtml(data));
+            });
+        </script>
+
         <script src="./scripts/main.js"></script>
     </head>
     <body>
-        <header>
+        <header role="banner">
             <h1>JavaScript next reference!</h1>
         </header>
 
         <ul class="content-index"></ul>
 
-        <section>
-            <h2 id="arrow-functions">Arrow Functions</h2>
-            <p>A short hand notation for <code>function()</code>.</p>
-            <pre class="lang-javascript javascript">
-var odds = evens.map(v => v + 1);  // no parentes and no brackets
-var nums = evens.map((v, i) => v + i);
-var pairs = evens.map(v => ({even: v, odd: v + 1}));
+        <section id="content"></section>
 
-// Statement bodies
-nums.forEach(v => {
-  if (v % 5 === 0)
-    fives.push(v);
-});
-            </pre>
-        </section>
     </body>
 </html>

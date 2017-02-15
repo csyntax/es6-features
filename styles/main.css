@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: Arial, sans-serif;
+}
+
+[role="banner"] {
+    text-align: center;
+    text-transform: uppercase;
+}
