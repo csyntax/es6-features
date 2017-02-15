@@ -19,14 +19,16 @@
             var converter = new showdown.Converter();
 
             var docs = [
-
+                "arrows.md"
             ];
 
-            $.ajax({
-                url: "./docs/arrows.md"
-            }).done(function (data) {
-                $("#content").append(converter.makeHtml(data));
-            });
+            for(var doc in docs) {
+                $.ajax({
+                    url: "./docs/" + docs[doc]
+                }).done(function (data) {
+                    $("#content").append(converter.makeHtml(data));
+                });
+            }
         </script>
 
         <script src="./scripts/main.js"></script>
