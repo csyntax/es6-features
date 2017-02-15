@@ -182,19 +182,5 @@ function executeCode(index) {
 var page = new Page(config);
 
 $(document).ready(function () {
-    var converter = new showdown.Converter();
-
-    var docs = [
-        "arrows.md"
-    ];
-
-    for(var doc in docs) {
-        $.ajax({
-            url: "../docs/" + docs[doc]
-        }).done(function (data) {
-            $("#content").append(converter.makeHtml(data));
-        })
-    }
-
     page.initialize();
 });
