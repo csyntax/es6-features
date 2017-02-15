@@ -190,10 +190,10 @@ $(document).ready(function () {
 
     for(var doc in docs) {
         $.ajax({
-            url: "./docs/" + docs[doc]
+            url: "../docs/" + docs[doc]
         }).done(function (data) {
             $("#content").append(converter.makeHtml(data));
-        });
+        })
     }
 
     page.initialize();
