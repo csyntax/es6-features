@@ -16,19 +16,7 @@
 
 
         <script>
-            var converter = new showdown.Converter();
-
-            var docs = [
-                "arrows.md"
-            ];
-
-            for(var doc in docs) {
-                $.ajax({
-                    url: "./docs/" + docs[doc]
-                }).done(function (data) {
-                    $("#content").append(converter.makeHtml(data));
-                });
-            }
+            
         </script>
 
         <script src="./scripts/main.js"></script>

@@ -1,51 +1,20 @@
-/*var config = {
+var config = {
     codeBlockSelector: ".lang-javascript,.javascript",
     indexSelector: ".content-index",
     headlineSelector: "h2"
-};*/
-
-/**
- *
- * This "script" provides functionality to
- * turn html "code blocks" into executable blocks while providing
- * an index based on headlines.
- *
- */
-
-// =========================================================================
-// Configuration
-// =========================================================================
-let config = {
-  codeBlockSelector: ".lang-javascript,.javascript",
-  indexSelector: ".content-index",
-  headlineSelector: "h2"
 };
 
-
-// =========================================================================
-// Helpers
-// =========================================================================
-
-/**
- * Pipes the data through the supplied methods.
- */
 function pipe(data, ...methods) {
-  let result = data;
-  for (method of methods) {
-    result = method.bind(this)(result)
-  }
+    var result = data;
 
-  return result;
+    for (method of methods) {
+        result = method.bind(this)(result)
+    }
+
+    return result;
 }
 
 
-// =========================================================================
-// Classes
-// =========================================================================
-
-/**
- * CodeConverter class that can convert HTML to executable code with result handling
- */
 class CodeConverter {
 
   constructor(index) {
@@ -208,8 +177,22 @@ function executeCode(index) {
 // Bootstraping
 // =========================================================================
 
+var converter = new showdown.Converter();
+
+var docs = [
+    "arrows.md"
+];
+
+for(var doc in docs) {
+    $.ajax({
+        url: "./docs/" + docs[doc]
+    }).done(function (data) {
+        $("#content").append(converter.makeHtml(data));
+    });
+}
+
 var page = new Page(config);
 
 $(document).ready(function () {
-  page.initialize();
-})
+    page.initialize();
+});
