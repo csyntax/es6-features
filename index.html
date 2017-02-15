@@ -19,32 +19,6 @@
 
         <ul id="content-index"></ul>
 
-        <section id="content"></section>
-
-        <script>
-        var converter = new showdown.Converter();
-
-        var docs = [
-            "arrows.md",
-            "classes.md",
-            "Destructuring.md"
-        ];
-
-        for(var doc in docs) {
-            /*$.ajax({
-                url: "md/" + docs[doc]
-            }).done(function (data) {
-                $("#content").append(converter.makeHtml(data));
-            });*/
-
-            $.get("md/" + docs[doc], function (data) {
-                $("body").append(converter.makeHtml(data));
-            });
-        }
-
-
-        </script>
-
         <script src="./scripts/main.js"></script>
     </body>
 </html>
