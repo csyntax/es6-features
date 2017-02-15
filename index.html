@@ -12,8 +12,6 @@
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-
-
     </head>
     <body>
         <header role="banner">
@@ -33,7 +31,7 @@
 
         for(var doc in docs) {
             $.ajax({
-                url: "docs/" + docs[doc]
+                url: "md/" + docs[doc]
             }).done(function (data) {
                 $("#content").append(converter.makeHtml(data));
             })
