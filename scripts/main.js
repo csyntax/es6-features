@@ -1,5 +1,5 @@
 let config = {
-    codeBlockSelector: ".lang-javascript,.javascript",
+    codeBlockSelector: ".javascript",
     indexSelector: "#content-index",
     headlineSelector: "h2"
 };
@@ -23,38 +23,35 @@ class CodeConverter {
         return pipe.bind(this)(code, this.removeHtmlEntities, this.decodeEntities, this.addResultHandling);
     }
 
-  addResultHandling(code) {
-    return code
-      .replace(/console/, `clearResult("${this.index}"); \nconsole`)
-      .replace(/console.log\((.*)\).*/g, `
-      try {
-          let _______a = $1;
-          if(typeof(_______a) === 'object' && _______a != window) {
-              _______a = JSON.stringify(_______a)
+      addResultHandling(code) {
+          return code
+          .replace(/console/, `clearResult("${this.index}"); \nconsole`)
+          .replace(/console.log\((.*)\).*/g, `
+          try {
+              let _______a = $1;
+              if(typeof(_______a) === 'object' && _______a != window) {
+                  _______a = JSON.stringify(_______a)
+              }
+              addResult('${this.index}', '$1 -> ' + _______a);
           }
-          addResult('${this.index}', '$1 -> ' + _______a);
+          catch(e) {
+              addResult('${this.index}', '$1 -> '+ e);
+          }`)
       }
-      catch(e) {
-          addResult('${this.index}', '$1 -> '+ e);
-      }`)
 
-  }
+      decodeEntities(encodedString) {
+          let textArea = document.createElement('textarea');
 
-  decodeEntities(encodedString) {
-    let textArea = document.createElement('textarea');
-    textArea.innerHTML = encodedString;
-    return textArea.value;
-  }
+          textArea.innerHTML = encodedString;
 
+          return textArea.value;
+      }
 
-  removeHtmlEntities(text) {
-    return text.replace(/<(?:.|\/)(?:.|\n)*?>/gm, '');
-  }
+      removeHtmlEntities(text) {
+          return text.replace(/<(?:.|\/)(?:.|\n)*?>/gm, '');
+      }
 }
 
-/**
- * CodeBlock class, representing a code block
- */
 class CodeBlock {
   constructor(element, index) {
     this.index = index;
