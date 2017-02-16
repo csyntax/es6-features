@@ -1,11 +1,11 @@
-var config = {
+let config = {
     codeBlockSelector: ".lang-javascript,.javascript",
     indexSelector: "#content-index",
     headlineSelector: "h2"
 };
 
 function pipe(data, ...methods) {
-    var result = data;
+    let result = data;
 
     for (method of methods) {
         result = method.bind(this)(result)
@@ -14,13 +14,10 @@ function pipe(data, ...methods) {
     return result;
 }
 
-
 class CodeConverter {
-
-  constructor(index) {
-    this.index = index;
-
-  }
+    constructor(index) {
+        this.index = index;
+    }
 
   convert(code) {
     return pipe.bind(this)(code,
@@ -110,9 +107,9 @@ class CodeBlock {
     $(this.element).prop('contenteditable', 'true');
   }
 
-  removeNoEval(s) {
+  /*removeNoEval(s) {
     this.element.innerHTML = this.element.innerHTML.replace(/no-eval.*\n/, "")
-  }
+}*/
 
 }
 
@@ -139,7 +136,7 @@ class Page {
 
   addIndex() {
     $(this.config.headlineSelector).each((_, element) => {
-      $(element).wrap(`<a name="${element.innerHTML}"></a>`)
+      $(element).wrap(`<a id="${element.innerHTML}"></a>`)
       $(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
 
       console.log(element)
@@ -179,7 +176,7 @@ function executeCode(index) {
 
 }
 
-var converter = new showdown.Converter();
+let converter = new showdown.Converter();
 
 $.get("README.md", function (data) {
     $("body").append(converter.makeHtml(data));
