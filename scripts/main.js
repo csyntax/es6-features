@@ -63,7 +63,7 @@ class CodeBlock {
   constructor(element, index) {
     this.index = index;
     this.codeConverter = new CodeConverter(index)
-    this.isExecutable = !element.innerHTML.includes("no-eval")
+    //this.isExecutable = !element.innerHTML.includes("no-eval")
     this.element = element
     this.addFunctionalityToLangBlock();
   }
@@ -83,13 +83,13 @@ class CodeBlock {
   }
 
   addFunctionalityToLangBlock() {
-    if (this.isExecutable) {
+    //if (this.isExecutable) {
       this.addExecutionButton();
       this.addCodeBlockClass();
       this.addContentEditableAttribute();
-    } else {
+    /*} else {
       this.removeNoEval(this.element.innerHTML);
-    }
+  }*/
   }
 
   addCodeBlockClass() {
