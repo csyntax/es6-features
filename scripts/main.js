@@ -19,13 +19,9 @@ class CodeConverter {
         this.index = index;
     }
 
-  convert(code) {
-    return pipe.bind(this)(code,
-      this.removeHtmlEntities,
-      this.decodeEntities,
-      this.addResultHandling
-    );
-  }
+    convert(code) {
+        return pipe.bind(this)(code, this.removeHtmlEntities, this.decodeEntities, this.addResultHandling);
+    }
 
   addResultHandling(code) {
     return code
