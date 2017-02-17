@@ -7,8 +7,8 @@ let config = {
 function pipe(data, ...methods) {
     let result = data;
 
-    for (method of methods) {
-        result = method.bind(this)(result)
+    for (let method of methods) {
+        result = method.bind(this)(result);
     }
 
     return result;
@@ -23,20 +23,16 @@ class CodeConverter {
         return pipe.bind(this)(code, this.removeHtmlEntities, this.decodeEntities, this.addResultHandling);
     }
 
-      addResultHandling(code) {
+    addResultHandling(code) {
           return code
           .replace(/console/, `clearResult("${this.index}"); \nconsole`)
           .replace(/console.log\((.*)\).*/g, `
           try {
-              let _______a = $1;
-              if(typeof(_______a) === 'object' && _______a != window) {
-                  _______a = JSON.stringify(_______a)
-              }
-              addResult('${this.index}', '$1 -> ' + _______a);
+              addResult('${this.index}', '$1 -> ' + $1);
           }
           catch(e) {
               addResult('${this.index}', '$1 -> '+ e);
-          }`)
+          }`);
       }
 
       decodeEntities(encodedString) {
