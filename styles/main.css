@@ -7,7 +7,22 @@ html {
     font-family: Arial, sans-serif;
 }
 
+body {
+    background: rgb(30, 30, 29);
+    color: white;
+}
+
 [role="banner"] {
     text-align: center;
     text-transform: uppercase;
+    color: rgb(255, 173, 21);
+}
+
+[role="main"] {
+    margin: 0 auto;
+    max-width: 950px;
+}
+
+[role="main"] ol a {
+    color: rgb(255, 173, 21);
 }

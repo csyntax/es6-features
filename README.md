@@ -3,7 +3,6 @@
 A short hand notation for `function()`, but it does not bind `this`.
 
 ```javascript
-no-eval
 var odds = evens.map(v => v + 1);  // no parentes and no brackets
 var nums = evens.map((v, i) => v + i);
 var pairs = evens.map(v => ({even: v, odd: v + 1}));
@@ -41,7 +40,6 @@ As we know them from "real" languages. Syntactic sugar on top of prototype-inher
 
 
 ```javascript
-no-eval
 class SkinnedMesh extends THREE.Mesh {
   constructor(geometry, materials) {
     super(geometry, materials);

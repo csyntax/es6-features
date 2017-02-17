@@ -131,13 +131,7 @@ class Page {
     $(this.config.headlineSelector).each((_, element) => {
       $(element).wrap(`<a id="${element.innerHTML}"></a>`)
       $(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
-
-      console.log(element)
     })
-
-    $(this.config.headlineSelector).each(function(index) {
-        console.log(index);
-    });
   }
 
   addCodeHighlight() {
@@ -172,7 +166,7 @@ function executeCode(index) {
 let converter = new showdown.Converter();
 
 $.get("README.md", function (data) {
-    $("body").append(converter.makeHtml(data));
+    $("#content").append(converter.makeHtml(data));
 });
 
 var page = new Page(config);
