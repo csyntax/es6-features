@@ -1,24 +1,29 @@
 ## Arrow Functions
-
 A short hand notation for `function()`, but it does not bind `this`.
 
 ```javascript
-var odds = evens.map(v => v + 1);  // no parentes and no brackets
-var nums = evens.map((v, i) => v + i);
-var pairs = evens.map(v => ({even: v, odd: v + 1}));
+let odds = evens.map(v => v + 1);
+let nums = evens.map((v, i) => v + i);
+let pairs = evens.map(v => ({
+    even: v,
+    odd: v + 1
+}));
 
-// Statement bodies
 nums.forEach(v => {
-  if (v % 5 === 0)
-    fives.push(v);
+    if (v % 5 === 0)  {
+        fives.push(v);
+    }    
 });
+
+console.log(odds);
+console.log(nums);
+console.log(pairs);
 ```
 
 How does `this` work?
 
-
 ```javascript
-var object = {
+let obj = {
     name: "Name",
     arrowGetName: () => this.name,
     regularGetName: function() { return this.name },
@@ -27,11 +32,11 @@ var object = {
 }
 
 console.log(this.name)
-console.log(object.arrowGetName());
-console.log(object.arrowGetThis());
+console.log(obj.arrowGetName());
+console.log(obj.arrowGetThis());
 console.log(this)
-console.log(object.regularGetName());
-console.log(object.regularGetThis());
+console.log(obj.regularGetName());
+console.log(obj.regularGetThis());
 ```
 
 ## Classes
