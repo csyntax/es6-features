@@ -33,135 +33,122 @@ class CodeConverter {
           catch(e) {
               addResult('${this.index}', '$1 -> '+ e);
           }`);
-      }
+	}
 
-      decodeEntities(encodedString) {
-          let textArea = document.createElement('textarea');
+    decodeEntities(encodedString) {
+    	let textArea = document.createElement("textarea");
 
-          textArea.innerHTML = encodedString;
+        textArea.innerHTML = encodedString;
 
-          return textArea.value;
-      }
+        return textArea.value;
+    }
 
-      removeHtmlEntities(text) {
-          return text.replace(/<(?:.|\/)(?:.|\n)*?>/gm, '');
-      }
+    removeHtmlEntities(text) {
+        return text.replace(/<(?:.|\/)(?:.|\n)*?>/gm, '');
+    }
 }
 
 class CodeBlock {
-  constructor(element, index) {
-    this.index = index;
-    this.codeConverter = new CodeConverter(index)
-    this.element = element
-    this.addFunctionalityToLangBlock();
-  }
+	constructor(element, index) {
+    	this.index = index;
+    	this.codeConverter = new CodeConverter(index)
+    	this.element = element;
+    	this.addFunctionalityToLangBlock();
+	}
+	
+	execute() {
+    	try {
+      		this.convertAndExecute();
+    	} catch (e) {
+      		console.log(e);
+      		
+			addResult(this.index, e)
+    	}
+  	}
 
-  execute() {
-    try {
-      this.convertAndExecute();
-    } catch (e) {
-      console.log(e)
-      addResult(this.index, e)
-    }
-  }
+  	convertAndExecute() {
+    	let code = this.codeConverter.convert(this.element.innerHTML);
+    	
+		eval.apply(window, [code]);
+	}
 
-  convertAndExecute() {
-    let code = this.codeConverter.convert(this.element.innerHTML);
-    eval.apply(window, [code]);
-  }
+	addFunctionalityToLangBlock() {
+		this.addExecutionButton();
+      	this.addCodeBlockClass();
+      	this.addContentEditableAttribute();
+	}
 
-  addFunctionalityToLangBlock() {
-      this.addExecutionButton();
-      this.addCodeBlockClass();
-      this.addContentEditableAttribute();
-  }
+	addCodeBlockClass() {
+    	$(this.element).addClass(`codeblock-${this.index}`);
+	}
 
-  addCodeBlockClass() {
-    $(this.element).addClass("codeblock-" + this.index);
-  }
+	addExecutionButton() {
+    	$(this.element).parent().after(`
+        	<button onclick="executeCode('${this.index}')">Evaluate</button>
+        	<div class="results" id="${this.index}"></div>
+		`);
+	}
 
-  addExecutionButton() {
-    $(this.element).parent().after(`
-        <button onclick="executeCode('${this.index}')">Evaluate</button>
-        <div class="results" id="${this.index}"></div>
-    `)
-  }
-
-  addContentEditableAttribute() {
-    $(this.element).prop('contenteditable', 'true');
-  }
-
-  /*removeNoEval(s) {
-    this.element.innerHTML = this.element.innerHTML.replace(/no-eval.*\n/, "")
-}*/
-
+  	addContentEditableAttribute() {
+    	$(this.element).prop('contenteditable', 'true');
+  	}
 }
 
-/**
- * Page class representing the entire page
- */
 class Page {
-  constructor(config) {
-    this.config = config;
-    this.codeBlocks = new Map();
-  }
+	constructor(config) {
+    	this.config = config;
+    	this.codeBlocks = new Map();
+  	}
 
-  initialize() {
-    this.initializeCodeBlocks();
-    this.addIndex();
-    this.addCodeHighlight();
-  }
+  	initialize() {
+    	this.initializeCodeBlocks();
+    	this.addIndex();
+    	this.addCodeHighlight();
+  	}
 
-  initializeCodeBlocks() {
-    $(this.config.codeBlockSelector).each((i, element) => {
-      this.codeBlocks.set(i, new CodeBlock(element, i));
-    })
-  }
+  	initializeCodeBlocks() {
+    	$(this.config.codeBlockSelector).each((i, element) => {
+      		this.codeBlocks.set(i, new CodeBlock(element, i));
+    	});
+  	}
 
-  addIndex() {
-    $(this.config.headlineSelector).each((_, element) => {
-      $(element).wrap(`<a id="${element.innerHTML}"></a>`)
-      $(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
-    })
-  }
-
-  addCodeHighlight() {
-    $('pre code').each(function (i, block) {
-      hljs.highlightBlock(block);
-    });
-  }
-
+  	addIndex() {
+    	$(this.config.headlineSelector).each((_, element) => {
+      		$(element).wrap(`<a id="${element.innerHTML}"></a>`)
+      		$(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
+    	});
+	}
+	
+	addCodeHighlight() {
+    	$('pre code').each(function (i, block) {
+      		hljs.highlightBlock(block);
+    	});
+	}
 }
-
-
-// =========================================================================
-// Global Methods
-// =========================================================================
 
 function addResult(id, res) {
-  document.getElementById(id).innerHTML += res + "<br />";
+	document.getElementById(id).innerHTML += `${res} <br />`;
 }
 
 function clearResult(id) {
-  document.getElementById(id).innerHTML = "";
+	document.getElementById(id).innerHTML = "";
 }
 
 function executeCode(index) {
-  let codeBlock = page.codeBlocks.get(parseInt(index));
-  if (codeBlock) {
-    codeBlock.execute();
-  }
-
+	let codeBlock = page.codeBlocks.get(parseInt(index));
+  	
+	if (codeBlock) {
+    	codeBlock.execute();
+  	}
 }
 
 let converter = new showdown.Converter();
+let page = new Page(config);
 
 $.get("README.md", function (data) {
     $("#content").append(converter.makeHtml(data));
 });
 
-var page = new Page(config);
-
-$( document ).ajaxComplete(function() {
+$(document).ajaxComplete(() => {
     page.initialize();
 });
