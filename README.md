@@ -58,6 +58,7 @@ console.log(new Person("Ivan Ivanov", 19));
 ```
 
 ## Enhanced Object Literals
+
 ```javascript
 var theProtoObj = {
     toString: function() {
@@ -110,6 +111,7 @@ console.log(multiLine);
 ```
 
 ## Destructuring
+
 ```javascript
 var [a, ,b] = [1, 2, 3];
 
@@ -117,7 +119,7 @@ console.log(a);
 console.log(b);
 ```
 
- Objects can be destructured as well.
+Objects can be destructured as well.
 
 ```javascript
 var nodes = () => {
@@ -130,9 +132,10 @@ console.log(a);
 console.log(b);
 console.log(c);
 ```
- Using Shorthand notation.
 
- ```javascript
+Using Shorthand notation.
+
+```javascript
 var nodes = () => {
     return { lhs: "a", op: "b", rhs: "c" };
 };
@@ -147,7 +150,7 @@ console.log(rhs);
 
 Can be used in parameter position
 
- ```javascript
+```javascript
 function g({ name: x }) {
     return x;
 }
