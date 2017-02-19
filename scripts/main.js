@@ -55,20 +55,20 @@ class CodeBlock {
     	this.element = element;
     	this.addFunctionalityToLangBlock();
 	}
-	
+
 	execute() {
     	try {
       		this.convertAndExecute();
     	} catch (e) {
       		console.log(e);
-      		
+
 			addResult(this.index, e)
     	}
   	}
 
   	convertAndExecute() {
     	let code = this.codeConverter.convert(this.element.innerHTML);
-    	
+
 		eval.apply(window, [code]);
 	}
 
@@ -107,8 +107,8 @@ class Page {
   	}
 
   	initializeCodeBlocks() {
-    	$(this.config.codeBlockSelector).each((i, element) => {
-      		this.codeBlocks.set(i, new CodeBlock(element, i));
+    	$(this.config.codeBlockSelector).each((index, element) => {
+      		this.codeBlocks.set(index, new CodeBlock(element, index));
     	});
   	}
 
@@ -118,16 +118,16 @@ class Page {
       		$(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
     	});
 	}
-	
+
 	addCodeHighlight() {
-    	$('pre code').each(function (i, block) {
+    	$("pre > code").each((i, block) => {
       		hljs.highlightBlock(block);
     	});
 	}
 }
 
 function addResult(id, res) {
-	document.getElementById(id).innerHTML += `${res} <br />`;
+	document.getElementById(id).innerHTML += `<p> ${res} </p>`;
 }
 
 function clearResult(id) {
@@ -136,7 +136,7 @@ function clearResult(id) {
 
 function executeCode(index) {
 	let codeBlock = page.codeBlocks.get(parseInt(index));
-  	
+
 	if (codeBlock) {
     	codeBlock.execute();
   	}
@@ -145,10 +145,14 @@ function executeCode(index) {
 let converter = new showdown.Converter();
 let page = new Page(config);
 
-$.get("README.md", function (data) {
+$.get("README.md", (data) => {
     $("#content").append(converter.makeHtml(data));
 });
 
-$(document).ajaxComplete(() => {
+$(document).ajaxStart(() => {
+    $("#loading").show();
+}).ajaxComplete(() => {
+    $("#loading").hide();
+
     page.initialize();
 });
