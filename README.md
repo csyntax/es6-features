@@ -43,39 +43,22 @@ console.log(obj.regularGetThis());
 As we know them from "real" languages. Syntactic sugar on top of prototype-inheritence.
 
 ```javascript
-class SkinnedMesh extends THREE.Mesh {
-  constructor(geometry, materials) {
-    super(geometry, materials);
-
-    this.idMatrix = SkinnedMesh.defaultMatrix();
-    this.bones = [];
-    this.boneMatrices = [];
-    //...
-  }
-  update(camera) {
-    //...
-    super.update();
-  }
-  get boneCount() {
-    return this.bones.length;
-  }
-  set matrixType(matrixType) {
-    this.idMatrix = SkinnedMesh[matrixType]();
-  }
-  static defaultMatrix() {
-    return new THREE.Matrix4();
-  }
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;s
+    }
 }
 
+console.log(new Person("Ivan Ivanov", 19));
 ```
-[Lebab.io](https://lebab.io/#)
 
 ## Enhanced Object Literals
 ```javascript
 var theProtoObj = {
-  toString: function() {
-    return "The ProtoOBject To string"
-  }
+    toString: function() {
+        return "The ProtoOBject To string"
+    }
 }
 
 var handler = () => "handler"
@@ -98,17 +81,17 @@ var obj = {
     [ "prop_" + (() => 42)() ]: 42
 };
 
-console.log(obj.handler)
-console.log(obj.handler())
-console.log(obj.toString())
-console.log(obj.prop_42)
+console.log(obj.handler);
+console.log(obj.handler());
+console.log(obj.toString());
+console.log(obj.prop_42);
 ```
 
 ## String interpolation
 Nice syntax for string interpolation
 
 ```javascript
-var name = "Bob";
+var name = "Ivan Ivanov";
 var time = "today";
 
 var multiLine = `This
@@ -125,57 +108,79 @@ console.log(multiLine)
 
 ## Destructuring
 ```javascript
-// list "matching"
-var [a, , b] = [1,2,3];
-console.log(a)
-console.log(b)
+var [a, ,b] = [1, 2, 3];
+
+console.log(a);
+console.log(b);
 ```
 
  Objects can be destructured as well.
 
 ```javascript
-nodes = () => { return {op: "a", lhs: "b", rhs: "c"}}
-var { op: a, lhs: b , rhs: c } = nodes()
-console.log(a)
-console.log(b)
-console.log(c)
+nodes = () => {
+    return {
+        op: "a",
+        lhs: "b",
+        rhs: "c"
+    }
+}
+
+var {
+    op: a,
+    lhs: b,
+    rhs: c
+} = nodes();
+
+console.log(a);
+console.log(b);
+console.log(c);
 ```
  Using Shorthand notation.
 
  ```javascript
-nodes = () => { return {lhs: "a", op: "b", rhs: "c"}}
+nodes = () => {
+     return {
+         lhs: "a",
+         op: "b",
+         rhs: "c"
+     }
+ }
 
 // binds `op`, `lhs` and `rhs` in scope
-var {op, lhs, rhs} = nodes()
+var {
+    op,
+    lhs,
+    rhs
+} = nodes();
 
-console.log(op)
-console.log(lhs)
-console.log(rhs)
+console.log(op);
+console.log(lhs);
+console.log(rhs);
 ```
 
 Can be used in parameter position
 
  ```javascript
-
-function g({name: x}) {
-  return x
+function g({ name: x }) {
+    return x;
 }
 
 function m({name}) {
-  return name
+    return name;
 }
 
-console.log(g({name: 5}))
-console.log(m({name: 5}))
+console.log(g({name: 5}));
+console.log(m({name: 5}));
 ```
 
 Fail-soft destructuring
 
 ```javascript
-var [a] = []
-var [b = 1] = []
+var [a] = [];
+var [b = 1] = [];
 var c = [];
-console.log(a)
+
+console.log(a);
 console.log(b);
 console.log(c);
 ```
@@ -183,11 +188,11 @@ console.log(c);
 
 ## Default
 ```javascript
-function f(x, y=12) {
-  return x + y;
+function f(x, y = 12) {
+    return x + y;
 }
 
-console.log(f(3))
+console.log(f(3));
 ```
 
 ## Spread
@@ -196,10 +201,10 @@ In functions
 
 ```javascript
 function f(x, y, z) {
-  return x + y + z;
+    return x + y + z;
 }
-// Pass each elem of array as argument
-console.log(f(...[1,2,3]))
+
+console.log(f(...[1,2,3]));
 ```
 
 In arrays
@@ -208,44 +213,39 @@ In arrays
 var parts = ["shoulders", "knees"];
 var lyrics = ["head", ...parts, "and", "toes"];
 
-console.log(lyrics)
+console.log(lyrics);
 ```
 
 ## Spread + Object Literals
-
 We can do cool stuff with this in object creations.
 
 ```javascript
-no-eval
 let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
-console.log(x); // 1
-console.log(y); // 2
-console.log(z); // { a: 3, b: 4 }
 
-// Spread properties
+console.log(x);
+console.log(y);
+console.log(z);
+
 let n = { x, y, ...z };
-console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
-console.log(obj)
+console.log(n);
+console.log(obj);
 ```
 
-Sadly it is not support yet
-
-`npm install --save-dev babel-plugin-transform-object-rest-spread`
-
+Sadly it is not support yet `npm install --save-dev babel-plugin-transform-object-rest-spread`
 
 ## Rest
 We can allow unlimited params to function by using the rest operator.
+
 ```javascript
 function demo(part1, ...part2) {
-	return {part1, part2}
+	return { part1, part2 }
 }
 
-console.log(demo(1,2,3,4,5,6))
+console.log(demo(1,2,3,4,5,6));
 ```
 
-
 ## Let
-`Let` is the new `var`. As it has "sane" bindings.
+`let` is the new `var`. As it has "sane" bindings.
 
 ```javascript
 {
@@ -256,10 +256,10 @@ console.log(demo(1,2,3,4,5,6))
    let globalLet = "from demo2";
 }
 
-console.log(globalVar)
-console.log(globalLet)
-
+console.log(globalVar);
+console.log(globalLet);
 ```
+
 However, it does not assign anything to `window`
 
 ```javascript
