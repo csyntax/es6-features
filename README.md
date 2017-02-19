@@ -26,15 +26,19 @@ How does `this` work?
 let obj = {
     name: "Name",
     arrowGetName: () => this.name,
-    regularGetName: function() { return this.name },
+    regularGetName: function () {
+        return this.name
+    },
     arrowGetThis: () => this,
-    regularGetThis: function() { return this }
-}
+    regularGetThis: function () {
+        return this
+    }
+};
 
-console.log(this.name)
+console.log(this.name);
 console.log(obj.arrowGetName());
 console.log(obj.arrowGetThis());
-console.log(this)
+console.log(this);
 console.log(obj.regularGetName());
 console.log(obj.regularGetThis());
 ```
@@ -57,7 +61,7 @@ console.log(new Person("Ivan Ivanov", 19));
 ```javascript
 var theProtoObj = {
     toString: function() {
-        return "The ProtoOBject To string"
+        return "The prototype toString";
     }
 }
 
@@ -101,8 +105,8 @@ Spans Multiple
 
 Lines`
 
-console.log(`Hello ${name},how are you ${time}?`)
-console.log(multiLine)
+console.log(`Hello ${name},how are you ${time}?`);
+console.log(multiLine);
 ```
 
 ## Destructuring
@@ -116,7 +120,7 @@ console.log(b);
  Objects can be destructured as well.
 
 ```javascript
-nodes = () => {
+var nodes = () => {
     return { op: "a", lhs: "b", rhs: "c" };
 };
 
@@ -129,7 +133,7 @@ console.log(c);
  Using Shorthand notation.
 
  ```javascript
-nodes = () => {
+var nodes = () => {
     return { lhs: "a", op: "b", rhs: "c" };
 };
 
@@ -148,7 +152,7 @@ function g({ name: x }) {
     return x;
 }
 
-function m({name}) {
+function m({ name }) {
     return name;
 }
 
@@ -222,7 +226,8 @@ function demo(part1, ...part2) {
 	return { part1, part2 }
 }
 
-console.log(demo(1,2,3,4,5,6));
+console.log(demo(1,2,3,4,5,6).part1);
+console.log(demo(1,2,3,4,5,6).part2);
 ```
 
 ## Let
@@ -250,20 +255,21 @@ var i = "able"; // globally scoped
 console.log(window.me);
 console.log(window.i);
 ```
+
 It is not possible to redeclare a variable using `let`
 
 ```javascript
-
 let me = "foo";
 let me = "bar";
+
 console.log(me);
 ```
 
 ```javascript
-
 var me = "foo";
 var me = "bar";
-console.log(me)
+
+console.log(me);
 ```
 
 ## Const
