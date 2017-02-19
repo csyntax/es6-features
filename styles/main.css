@@ -12,17 +12,17 @@ body {
     color: rgb(248, 220, 61);
 }
 
-
-
-
-
 [role="main"] {
-    margin: 0 auto;
-    line-height: 1.5;
     margin: 0 auto;
     max-width: 850px;
     width: 90%;
+    line-height: 1.5;
     color: #d3d3d3;
+    padding-top: 2em;
+}
+
+[role="main"] #content-index {
+    border-bottom: 2px solid rgb(248, 220, 61);
 }
 
 @media screen and (max-width: 768px) {
@@ -58,19 +58,18 @@ body {
 	font-size: 1em;
 	line-height: 1.5;
 }
-	[role="main"] #content-index li:before {
-					position: absolute;
-					border-radius: 50%;
-					counter-increment: li;
-					content: counter(li);
-					width: 1.5em;
-					height: 1.5em;
-					/*top: 0.5em;*/
-					left: 0;
-					background: rgb(248, 220, 61);
-					color: white;
-					font-weight: 700;
-					line-height: 1.5;
-					text-align: center;
-				}
-			}
+
+[role="main"] #content-index li:before {
+    position: absolute;
+	border-radius: 50%;
+	counter-increment: li;
+	content: counter(li);
+	width: 1.5em;
+	height: 1.5em;
+	left: 0;
+	background: rgb(248, 220, 61);
+	color: white;
+	font-weight: 700;
+	line-height: 1.5;
+	text-align: center;
+}
