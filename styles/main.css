@@ -12,13 +12,65 @@ body {
     color: rgb(248, 220, 61);
 }
 
-[role="banner"] {
-    width: 100%;
-    height: 350px;
-    background: transparent url("../images/header.jpg");
-    background-size: 100% 100%;
+
+
+
+
+[role="main"] {
+    margin: 0 auto;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 850px;
+    width: 90%;
+    color: #d3d3d3;
 }
 
-[role="banner"] h1 {
-    display: none;
+@media screen and (max-width: 768px) {
+    [role="main"] {
+        width: 95%;
+    }
 }
+
+[role="main"] #content-index a {
+    font-weight: 700;
+    color: rgb(248, 220, 61);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+[role="main"] #content-index a:hover,
+[role="main"] #content-index a:focus {
+    color: white;
+}
+
+[role="main"] #content-index {
+    padding: 0 0.5em;
+    counter-reset: li;
+}
+
+[role="main"] #content-index li {
+    position: relative;
+	list-style: none;
+	padding-top: 0;
+	padding-left: 2.5em;
+	padding-bottom: 0.5em;
+	padding-right: 1em;
+	font-size: 1em;
+	line-height: 1.5;
+}
+	[role="main"] #content-index li:before {
+					position: absolute;
+					border-radius: 50%;
+					counter-increment: li;
+					content: counter(li);
+					width: 1.5em;
+					height: 1.5em;
+					/*top: 0.5em;*/
+					left: 0;
+					background: rgb(248, 220, 61);
+					color: white;
+					font-weight: 700;
+					line-height: 1.5;
+					text-align: center;
+				}
+			}

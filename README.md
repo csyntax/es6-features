@@ -40,9 +40,7 @@ console.log(obj.regularGetThis());
 ```
 
 ## Classes
-
 As we know them from "real" languages. Syntactic sugar on top of prototype-inheritence.
-
 
 ```javascript
 class SkinnedMesh extends THREE.Mesh {
@@ -72,9 +70,7 @@ class SkinnedMesh extends THREE.Mesh {
 ```
 [Lebab.io](https://lebab.io/#)
 
-
 ## Enhanced Object Literals
-
 ```javascript
 var theProtoObj = {
   toString: function() {
@@ -83,7 +79,6 @@ var theProtoObj = {
 }
 
 var handler = () => "handler"
-
 
 var obj = {
     // __proto__
@@ -107,16 +102,14 @@ console.log(obj.handler)
 console.log(obj.handler())
 console.log(obj.toString())
 console.log(obj.prop_42)
-
 ```
 
-
 ## String interpolation
-
 Nice syntax for string interpolation
 
 ```javascript
-var name = "Bob", time = "today";
+var name = "Bob";
+var time = "today";
 
 var multiLine = `This
 
@@ -126,22 +119,17 @@ Spans Multiple
 
 Lines`
 
-
 console.log(`Hello ${name},how are you ${time}?`)
 console.log(multiLine)
 ```
 
-
-
 ## Destructuring
-
 ```javascript
 // list "matching"
 var [a, , b] = [1,2,3];
 console.log(a)
 console.log(b)
 ```
-
 
  Objects can be destructured as well.
 
