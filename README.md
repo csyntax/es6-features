@@ -46,7 +46,7 @@ As we know them from "real" languages. Syntactic sugar on top of prototype-inher
 class Person {
     constructor(name, age) {
         this.name = name;
-        this.age = age;s
+        this.age = age;
     }
 }
 
@@ -61,7 +61,7 @@ var theProtoObj = {
     }
 }
 
-var handler = () => "handler"
+var handler = () => "handler";
 
 var obj = {
     // __proto__
@@ -72,9 +72,8 @@ var obj = {
 
     // Methods
     toString() {
-
-     // Super calls
-     return "d " + super.toString();
+         // Super calls
+         return "d " + super.toString();
     },
 
     // Computed (dynamic) property names
@@ -118,18 +117,10 @@ console.log(b);
 
 ```javascript
 nodes = () => {
-    return {
-        op: "a",
-        lhs: "b",
-        rhs: "c"
-    }
-}
+    return { op: "a", lhs: "b", rhs: "c" };
+};
 
-var {
-    op: a,
-    lhs: b,
-    rhs: c
-} = nodes();
+var { op: a, lhs: b, rhs: c } = nodes();
 
 console.log(a);
 console.log(b);
@@ -139,19 +130,11 @@ console.log(c);
 
  ```javascript
 nodes = () => {
-     return {
-         lhs: "a",
-         op: "b",
-         rhs: "c"
-     }
- }
+    return { lhs: "a", op: "b", rhs: "c" };
+};
 
 // binds `op`, `lhs` and `rhs` in scope
-var {
-    op,
-    lhs,
-    rhs
-} = nodes();
+var { op, lhs, rhs } = nodes();
 
 console.log(op);
 console.log(lhs);
@@ -185,7 +168,6 @@ console.log(b);
 console.log(c);
 ```
 
-
 ## Default
 ```javascript
 function f(x, y = 12) {
@@ -196,7 +178,6 @@ console.log(f(3));
 ```
 
 ## Spread
-
 In functions
 
 ```javascript
@@ -769,8 +750,8 @@ Need a quick always resolved promise?
 
 ```javascript
 
-var p1 = Promise.resolve("1")
-var p2 = Promise.reject("2")
+var p1 = Promise.resolve("1");
+var p2 = Promise.reject("2");
 
 Promise.race([p1, p2]).then((res) => {
    console.log(res)
@@ -810,37 +791,33 @@ Promise.all([p1, p2]).then((res) => {
 New type of meta programming with new API for existing and also few new methods.
 
 ```javascript
-
-var z = {w: "Super Hello"}
-var y = {x: "hello", __proto__: z};
+var z = { w: "Super Hello" };
+var y = { x: "hello", __proto__: z };
 
 console.log(Reflect.getOwnPropertyDescriptor(y, "x"));
 console.log(Reflect.has(y, "w"));
 console.log(Reflect.ownKeys(y, "w"));
-
 console.log(Reflect.has(y, "x"));
-console.log(Reflect.deleteProperty(y,"x"))
+console.log(Reflect.deleteProperty(y, "x"));
 console.log(Reflect.has(y, "x"));
-
 ```
 
-[More Info](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
-
 ## Tail Call Optimization
-ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).
-
+EcmaScript 6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).
 
 ```javascript
-
 function factorial(n, acc = 1) {
-    if (n <= 1) return acc;
+    if (n <= 1) {
+        return acc;
+    }
+
     return factorial(n - 1, n * acc);
 }
-console.log(factorial(10))
-console.log(factorial(100))
-console.log(factorial(1000))
-console.log(factorial(10000))
-console.log(factorial(100000))
-console.log(factorial(1000000))
 
+console.log(factorial(10));
+console.log(factorial(100));
+console.log(factorial(1000));
+console.log(factorial(10000));
+console.log(factorial(100000));
+console.log(factorial(1000000));
 ```
