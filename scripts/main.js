@@ -90,7 +90,7 @@ class CodeBlock {
 	}
 
   	addContentEditableAttribute() {
-    	$(this.element).prop('contenteditable', 'true');
+    	$(this.element).prop("contenteditable", "true");
   	}
 }
 
@@ -113,8 +113,8 @@ class Page {
   	}
 
   	addIndex() {
-    	$(this.config.headlineSelector).each((_, element) => {
-      		$(element).wrap(`<a id="${element.innerHTML}"></a>`)
+    	$(this.config.headlineSelector).each((index, element) => {
+      		$(element).wrap(`<a name="${element.innerHTML}"></a>`)
       		$(this.config.indexSelector).append(`<li><a href="#${element.innerHTML}">${element.innerHTML} </a></li>`);
     	});
 	}
@@ -127,7 +127,7 @@ class Page {
 }
 
 function addResult(id, res) {
-	document.getElementById(id).innerHTML += `<p> ${res} </p>`;
+	document.getElementById(id).innerHTML += `<p>${res}</p>`;
 }
 
 function clearResult(id) {
@@ -142,17 +142,16 @@ function executeCode(index) {
   	}
 }
 
-let converter = new showdown.Converter();
-let page = new Page(config);
+const converter = new showdown.Converter();
+const page = new Page(config);
 
-$.get("README.md", (data) => {
-    $("#content").append(converter.makeHtml(data));
+$.get("README.md", data => {
+    $("#content").html(converter.makeHtml(data));
 });
 
 $(document).ajaxStart(() => {
     $("#loading").show();
 }).ajaxComplete(() => {
     $("#loading").hide();
-
     page.initialize();
 });
