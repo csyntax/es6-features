@@ -2,6 +2,8 @@
 A short hand notation for `function()`, but it does not bind `this`.
 
 ```javascript
+let evens = [1,2,3,4,5,6,7,8,9];
+let fives = [];
 let odds = evens.map(v => v + 1);
 let nums = evens.map((v, i) => v + i);
 let pairs = evens.map(v => ({
@@ -17,7 +19,6 @@ nums.forEach(v => {
 
 console.log(odds);
 console.log(nums);
-console.log(pairs);
 ```
 
 How does `this` work?
