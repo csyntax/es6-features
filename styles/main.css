@@ -10,6 +10,12 @@ html {
 body {
     background: rgb(46, 46, 44);
     color: rgb(248, 220, 61);
+    border-top: 1em solid rgb(248, 220, 61);
+}
+
+::selection {
+    color: white;
+    background: rgb(248, 220, 61);
 }
 
 #loading {
@@ -18,6 +24,63 @@ body {
     height: 150px;
     background: transparent url("../images/gears-orange.svg");
     background-size: 100% 100%;
+}
+
+[role="banner"] h1,
+[role="main"] h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+[role="banner"] {
+    margin: 0 auto;
+    max-width: 1500px;
+    text-align: center;
+}
+
+[role="banner"] h1 {
+    font-size: 2.8em;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    color: white;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(white, rgb(248, 220, 61));
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  transition: font-size 0.5s;
+}
+
+@media (min-width: 320px) {
+    [role="banner"] h1 {
+        font-size: 3.6em;
+    }
+}
+
+@media (min-width: 420px) {
+    [role="banner"] h1 {
+        font-size: 4.8em;
+    }
+}
+
+@media (min-width: 580px) {
+    [role="banner"] h1 {
+        font-size: 5.6em;
+    }
+}
+
+@media (min-width: 650px) {
+    [role="banner"] h1 {
+        font-size: 6.2em;
+    }
+}
+
+
+@media (min-width: 850px) {
+    [role="banner"] h1 {
+        font-size: 7.5em;
+    }
 }
 
 [role="main"] {
